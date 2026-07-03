@@ -130,12 +130,109 @@ button:hover{filter:brightness(1.12)}
   .headtext{text-align:center}
   .logo{width:72px;height:72px}
 }
-@media print{
-  body{background:white}
-  .wrap{box-shadow:none;margin:0;border-radius:0}
-  .no-print{display:none}
-  main{grid-template-columns:1fr 1fr}
+
+
+@page{
+  size:A4 portrait;
+  margin:8mm;
 }
+@media print{
+  html,body{
+    width:210mm;
+    min-height:297mm;
+    background:white!important;
+    -webkit-print-color-adjust:exact!important;
+    print-color-adjust:exact!important;
+  }
+  .wrap{
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    border-radius:0!important;
+    box-shadow:none!important;
+    border:0!important;
+    overflow:visible!important;
+  }
+  header{
+    padding:10px 14px!important;
+    border-bottom:4px solid var(--gold)!important;
+  }
+  .logo{
+    width:52px!important;
+    height:52px!important;
+  }
+  header h1{
+    font-size:16px!important;
+    line-height:1.05!important;
+  }
+  header p{
+    font-size:13px!important;
+    margin-top:3px!important;
+    letter-spacing:1px!important;
+  }
+  main{
+    display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+    gap:10px!important;
+    padding:10px!important;
+    page-break-inside:avoid!important;
+    break-inside:avoid!important;
+  }
+  .card{
+    border-radius:10px!important;
+    box-shadow:none!important;
+    page-break-inside:avoid!important;
+    break-inside:avoid!important;
+  }
+  .card h2{
+    padding:6px 8px!important;
+    font-size:13px!important;
+  }
+  .row{
+    padding:5px 8px!important;
+    gap:6px!important;
+    font-size:10.5px!important;
+    min-height:0!important;
+  }
+  .row label{
+    font-size:10.5px!important;
+    line-height:1.05!important;
+  }
+  small{
+    font-size:8.5px!important;
+    line-height:1!important;
+  }
+  input,select{
+    font-size:10.5px!important;
+    padding:4px 5px!important;
+    border-radius:6px!important;
+    height:24px!important;
+  }
+  .big{
+    font-size:14px!important;
+  }
+  .goldValue{
+    font-size:14px!important;
+  }
+  .status{
+    padding:8px!important;
+    font-size:16px!important;
+  }
+  .footer{
+    padding:0 10px 8px!important;
+    page-break-inside:avoid!important;
+    break-inside:avoid!important;
+  }
+  .note{
+    font-size:9px!important;
+    padding:6px 8px!important;
+    margin:0!important;
+  }
+  .no-print,button{
+    display:none!important;
+  }
+}
+
 </style>
 </head>
 <body>
