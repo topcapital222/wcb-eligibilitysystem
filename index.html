@@ -307,7 +307,7 @@ function calc(){
   let maxLoan=(1+rate*yrs)>0 ? paymentAvailable*months/(1+rate*yrs) : 0;
   let monthlyPayment=months>0 ? loan*(1+rate*yrs)/months : 0;
   let totalMonthlyDeduction=monthlyPayment+FIXED_YURAN;
-  let newDeduction=ded+totalMonthlyDeduction;
+  let newDeduction=Math.max(0, ded-settlement)+totalMonthlyDeduction;
   let baki=income-newDeduction;
   let bakiP=income?baki/income*100:0;
   let onhand=loan*FIXED_PAYOUT;
