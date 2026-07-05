@@ -1,33 +1,24 @@
 <!doctype html>
-<html lang="zh">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WCB Personal Financing Calculator</title>
+<title>WCB Personal Financing Eligibility System v1.0.1</title>
 <style>
 :root{
-  --gold:#c9982e;
-  --gold2:#f0cf78;
-  --black:#0d0d0f;
-  --panel:#ffffff;
-  --soft:#f7f4ed;
-  --green:#168447;
-  --red:#b3261e;
-  --text:#171717;
-  --muted:#6b6b6b;
+  --gold:#c9982e; --gold2:#f0cf78; --black:#0d0d0f; --green:#168447; --red:#b3261e;
+  --text:#171717; --muted:#6b6b6b; --line:#eee8db;
 }
 *{box-sizing:border-box}
 body{
   margin:0;
-  font-family:Arial,"Microsoft YaHei",sans-serif;
-  background:
-    radial-gradient(circle at top left, #fff7df 0, transparent 30%),
-    linear-gradient(135deg,#f7f7f7,#ececec);
+  font-family:Arial,Helvetica,sans-serif;
+  background:linear-gradient(135deg,#f8f8f8,#eeeeee);
   color:var(--text);
 }
 .wrap{
   max-width:1040px;
-  margin:22px auto;
+  margin:18px auto;
   background:white;
   border-radius:22px;
   overflow:hidden;
@@ -37,202 +28,82 @@ body{
 header{
   background:linear-gradient(135deg,#090909,#1c1c1f 70%,#33250d);
   color:white;
-  padding:22px 28px;
+  padding:22px 26px;
   border-bottom:6px solid var(--gold);
   display:flex;
   align-items:center;
-  gap:20px;
+  gap:18px;
 }
-.logo{
-  width:90px;height:90px;object-fit:contain;flex:0 0 auto;
-  filter:drop-shadow(0 4px 12px #0008);
-}
+.logo{width:76px;height:76px;object-fit:contain;flex:0 0 auto;filter:drop-shadow(0 4px 12px #0008)}
 .headtext{text-align:left}
-header h1{margin:0;color:var(--gold2);font-size:25px;line-height:1.15;letter-spacing:.4px}
-header p{margin:8px 0 0;font-weight:bold;letter-spacing:1.8px;color:#fff}
-.badge{
-  display:inline-block;margin-top:10px;padding:5px 10px;border:1px solid #d6b35d;
-  color:#f6d98a;border-radius:999px;font-size:12px;font-weight:bold;
-}
+header h1{margin:0;color:var(--gold2);font-size:23px;line-height:1.15;letter-spacing:.4px}
+header p{margin:8px 0 0;font-weight:900;letter-spacing:1.6px;color:#fff;font-size:17px}
 main{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:22px}
 .card{
   border:1px solid #e2dccd;
   border-radius:18px;
   overflow:hidden;
-  background:var(--panel);
+  background:#fff;
   box-shadow:0 7px 20px #00000012;
 }
 .card h2{
-  margin:0;
-  background:linear-gradient(135deg,var(--gold),#e5bd5e);
-  padding:12px 14px;
-  text-align:center;
-  font-size:18px;
-  letter-spacing:1px;
+  margin:0;background:linear-gradient(135deg,var(--gold),#e5bd5e);
+  padding:13px 14px;text-align:center;font-size:18px;letter-spacing:1px;
 }
 .row{
-  display:grid;
-  grid-template-columns:1.12fr 1fr;
-  gap:10px;
-  align-items:center;
-  padding:11px 15px;
-  border-bottom:1px solid #eee8db;
+  display:grid;grid-template-columns:1.03fr 1.17fr;gap:10px;align-items:center;
+  padding:11px 15px;border-bottom:1px solid var(--line);
 }
 .row:nth-child(even){background:#fffdf8}
-.row label{font-weight:bold}
+.row label{font-weight:800;line-height:1.15}
 small{font-weight:normal;color:var(--muted)}
 input,select{
-  font-size:16px;
-  padding:9px 10px;
-  border:1px solid #cfc7b5;
-  border-radius:10px;
-  text-align:right;
-  background:white;
-  outline:none;
+  font-size:16px;padding:10px 11px;border:1px solid #cfc7b5;border-radius:12px;
+  text-align:right;background:white;outline:none;width:100%;height:42px;
 }
 input:focus,select:focus{border-color:var(--gold);box-shadow:0 0 0 3px #c9982e22}
-.result .row span{text-align:right;font-weight:bold}
+.result .row span{text-align:right;font-weight:800}
 .big{font-size:22px;color:var(--gold);font-weight:900!important}
 .goldValue{font-size:21px;color:var(--gold);font-weight:900!important}
 .status{padding:16px;text-align:center;font-size:26px;font-weight:900;color:white;letter-spacing:1px}
-.layak{background:linear-gradient(135deg,#168447,#0d6d37)}
-.not{background:linear-gradient(135deg,#b3261e,#831a15)}
-.footer{
-  padding:4px 22px 24px;
-  text-align:center;
-}
+.eligible{background:linear-gradient(135deg,#168447,#0d6d37)}
+.noteligible{background:linear-gradient(135deg,#b3261e,#831a15)}
+.footer{padding:4px 22px 24px;text-align:center}
 .note{
-  color:#555;
-  font-size:13px;
-  line-height:1.5;
-  background:#faf7ef;
-  border:1px solid #eadfca;
-  border-radius:14px;
-  padding:12px 16px;
-  margin-bottom:14px;
+  color:#555;font-size:13px;line-height:1.5;background:#faf7ef;border:1px solid #eadfca;
+  border-radius:14px;padding:12px 16px;margin-bottom:14px;
 }
 button{
-  padding:13px 22px;
-  border:0;
-  border-radius:12px;
-  background:linear-gradient(135deg,#111,#333);
-  color:white;
-  font-weight:bold;
-  font-size:15px;
-  cursor:pointer;
-  box-shadow:0 6px 16px #0003;
+  padding:13px 22px;border:0;border-radius:12px;background:linear-gradient(135deg,#111,#333);
+  color:white;font-weight:bold;font-size:15px;cursor:pointer;box-shadow:0 6px 16px #0003;
 }
-button:hover{filter:brightness(1.12)}
 @media(max-width:760px){
-  main{grid-template-columns:1fr;padding:14px}
-  .wrap{margin:0;border-radius:0}
-  header{justify-content:center;text-align:center;flex-direction:column}
-  .headtext{text-align:center}
-  .logo{width:72px;height:72px}
+ .wrap{margin:0;border-radius:0}
+ header{justify-content:center;text-align:center;flex-direction:column;padding:18px 14px}
+ .headtext{text-align:center} .logo{width:68px;height:68px}
+ header h1{font-size:18px} header p{font-size:15px;letter-spacing:1px}
+ main{grid-template-columns:1fr;padding:14px;gap:14px}
+ .row{grid-template-columns:.90fr 1.10fr;padding:12px 14px}
+ input,select{font-size:17px;padding:11px;height:46px}
+ .big{font-size:23px} .goldValue{font-size:22px}
 }
-
-
-@page{
-  size:A4 portrait;
-  margin:8mm;
-}
+@page{size:A4 portrait;margin:8mm}
 @media print{
-  html,body{
-    width:210mm;
-    min-height:297mm;
-    background:white!important;
-    -webkit-print-color-adjust:exact!important;
-    print-color-adjust:exact!important;
-  }
-  .wrap{
-    width:100%!important;
-    max-width:none!important;
-    margin:0!important;
-    border-radius:0!important;
-    box-shadow:none!important;
-    border:0!important;
-    overflow:visible!important;
-  }
-  header{
-    padding:10px 14px!important;
-    border-bottom:4px solid var(--gold)!important;
-  }
-  .logo{
-    width:52px!important;
-    height:52px!important;
-  }
-  header h1{
-    font-size:16px!important;
-    line-height:1.05!important;
-  }
-  header p{
-    font-size:13px!important;
-    margin-top:3px!important;
-    letter-spacing:1px!important;
-  }
-  main{
-    display:grid!important;
-    grid-template-columns:1fr 1fr!important;
-    gap:10px!important;
-    padding:10px!important;
-    page-break-inside:avoid!important;
-    break-inside:avoid!important;
-  }
-  .card{
-    border-radius:10px!important;
-    box-shadow:none!important;
-    page-break-inside:avoid!important;
-    break-inside:avoid!important;
-  }
-  .card h2{
-    padding:6px 8px!important;
-    font-size:13px!important;
-  }
-  .row{
-    padding:5px 8px!important;
-    gap:6px!important;
-    font-size:10.5px!important;
-    min-height:0!important;
-  }
-  .row label{
-    font-size:10.5px!important;
-    line-height:1.05!important;
-  }
-  small{
-    font-size:8.5px!important;
-    line-height:1!important;
-  }
-  input,select{
-    font-size:10.5px!important;
-    padding:4px 5px!important;
-    border-radius:6px!important;
-    height:24px!important;
-  }
-  .big{
-    font-size:14px!important;
-  }
-  .goldValue{
-    font-size:14px!important;
-  }
-  .status{
-    padding:8px!important;
-    font-size:16px!important;
-  }
-  .footer{
-    padding:0 10px 8px!important;
-    page-break-inside:avoid!important;
-    break-inside:avoid!important;
-  }
-  .note{
-    font-size:9px!important;
-    padding:6px 8px!important;
-    margin:0!important;
-  }
-  .no-print,button{
-    display:none!important;
-  }
+ html,body{background:white!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+ .wrap{box-shadow:none;margin:0;border-radius:0;border:0;max-width:none}
+ header{padding:10px 14px!important;border-bottom:4px solid var(--gold)!important;flex-direction:row!important;text-align:left!important}
+ .logo{width:48px!important;height:48px!important} .headtext{text-align:left!important}
+ header h1{font-size:15px!important;line-height:1.05!important} header p{font-size:12px!important;margin-top:3px!important}
+ main{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;padding:8px!important}
+ .card{border-radius:10px!important;box-shadow:none!important;break-inside:avoid!important}
+ .card h2{padding:6px 8px!important;font-size:13px!important}
+ .row{padding:4.3px 7px!important;font-size:10px!important;gap:5px!important}
+ .row label{font-size:10px!important} small{font-size:8px!important}
+ input,select{font-size:10px!important;padding:2px 5px!important;height:21px!important;border-radius:5px!important}
+ .big,.goldValue{font-size:13px!important} .status{padding:7px!important;font-size:15px!important}
+ .footer{padding:0 8px 6px!important} .note{font-size:8.5px!important;padding:5px 7px!important;margin:0!important}
+ .no-print,button{display:none!important}
 }
-
 </style>
 </head>
 <body>
@@ -242,7 +113,6 @@ button:hover{filter:brightness(1.12)}
 <div class="headtext">
 <h1>KOPERASI WANITA MALAYSIA BERHAD (WCB)</h1>
 <p>PERSONAL FINANCING<br>ELIGIBILITY SYSTEM</p>
-<span class="badge"></span>
 </div>
 </header>
 
@@ -252,91 +122,132 @@ button:hover{filter:brightness(1.12)}
 <div class="row"><label>Applicant Name</label><input id="name" type="text" style="text-align:left"></div>
 <div class="row"><label>IC No.</label><input id="ic" type="text" style="text-align:left"></div>
 <div class="row"><label>Employer</label><input id="emp" type="text" style="text-align:left"></div>
-<div class="row"><label>Total Income (RM)</label><input id="income" type="number" value="0" step="0.01"></div>
-<div class="row"><label>Current Total Deduction (RM)</label><input id="deduction" type="number" value="0" step="0.01"></div>
-<div class="row"><label>In Transit (RM)</label><input id="intransit" type="number" value="0" step="0.01"></div>
-<div class="row"><label>Settlement<br><small>Monthly Payment (RM)</small></label><input id="settlement" type="number" value="0" step="0.01"></div>
+<div class="row"><label>Total Income (RM)</label><input id="income" class="money" inputmode="decimal" type="text"></div>
+<div class="row"><label>Current Total Deduction (RM)</label><input id="deduction" class="money" inputmode="decimal" type="text"></div>
+<div class="row"><label>In Transit (RM)</label><input id="intransit" class="money" inputmode="decimal" type="text"></div>
+<div class="row"><label>Settlement<br><small>Monthly Payment (RM)</small></label><input id="settlement" class="money" inputmode="decimal" type="text"></div>
+<div class="row"><label>Deduction Limit</label><select id="limit"><option value="0.6">60%</option><option value="0.5">50%</option></select></div>
 <div class="row"><label>Interest</label><select id="rate"><option value="0.0999">9.99%</option><option value="0.1199">11.99%</option></select></div>
-<div class="row"><label>Tempoh (Years)</label><select id="years"></select></div>
+<div class="row"><label>Tenure (Years)</label><select id="years"></select></div>
 </section>
 
 <section class="card result">
 <h2>RESULT</h2>
-<div class="row"><label>Kelayakan Bulanan</label><span id="kelayakanBulanan" class="big"></span></div>
-<div class="row"><label>Max Loan</label><span id="maxloan" class="big"></span></div>
-<div class="row"><label>Loan Amount (RM)</label><input id="loan" type="number" value="0" step="100"></div>
-<div class="row"><label>On Hand</label><span id="onhand" class="big"></span></div>
-<div class="row"><label>Yuran</label><span id="yuranOut"></span></div>
-<div class="row"><label>Payment</label><span id="payment"></span></div>
-<div class="row"><label>Total Monthly Deduction<br><small>Payment + Yuran</small></label><span id="totalMonthlyOut" class="goldValue"></span></div>
-<div class="row"><label>Baki Gaji</label><span id="baki"></span></div>
-<div class="row"><label>Baki %</label><span id="bakiPct"></span></div>
-<div class="row"><label>Warning</label><span id="warning"></span></div>
-<div id="status" class="status layak">LAYAK</div>
+<div class="row"><label>Monthly Eligibility</label><span id="monthlyEligibility" class="big">-</span></div>
+<div class="row"><label>Maximum Financing</label><span id="maximumFinancing" class="big">-</span></div>
+<div class="row"><label>Requested Financing (RM)</label><input id="requestedFinancing" class="money" inputmode="decimal" type="text"></div>
+<div class="row"><label>On Hand</label><span id="onhand" class="big">-</span></div>
+<div class="row"><label>Monthly Membership Fee</label><span id="fee">RM30.00</span></div>
+<div class="row"><label>Monthly Instalment</label><span id="instalment">-</span></div>
+<div class="row"><label>Total Monthly Deduction<br><small>Instalment + Membership Fee</small></label><span id="totalMonthlyDeduction" class="goldValue">-</span></div>
+<div class="row"><label>Net Salary Balance</label><span id="netSalaryBalance">-</span></div>
+<div class="row"><label>Salary Balance (%)</label><span id="salaryBalancePct">-</span></div>
+<div class="row" id="warningRow" style="display:none"><label>Warning</label><span id="warning">-</span></div>
+<div id="status" class="status noteligible">NOT ELIGIBLE</div>
 </section>
 </main>
 
 <div class="footer">
-<div class="note">
-Calculation is for estimation only. Final approval is subject to eligibility, documents verification, and HQ approval.
-</div>
+<div class="note">Calculation is for estimation only. Final approval is subject to eligibility, documents verification, and HQ approval.</div>
 <button class="no-print" onclick="window.print()">Print / Save PDF</button>
 </div>
 </div>
 
 <script>
-const FIXED_YURAN = 30;
-const FIXED_PAYOUT = 0.75;
-const MIN_BAKI_GAJI = 1100;
+const FIXED_FEE=30, FIXED_PAYOUT=0.75, MIN_NET_SALARY_BALANCE=1100;
+const yearsEl=document.getElementById("years");
+for(let i=1;i<=10;i++){let o=document.createElement("option");o.value=i;o.textContent=i;if(i===10)o.selected=true;yearsEl.appendChild(o);}
 
-const yearsEl = document.getElementById("years");
-for(let i=1;i<=10;i++){let o=document.createElement('option');o.value=i;o.textContent=i;if(i===10)o.selected=true;yearsEl.appendChild(o);}
-["income","deduction","intransit","settlement","rate","years","loan"].forEach(id=>{
-  document.getElementById(id).addEventListener("input",calc);
-  document.getElementById(id).addEventListener("change",calc);
+function cleanNumber(value){ return String(value||"").replace(/,/g,"").replace(/[RM\s]/gi,""); }
+function n(id){ const v=cleanNumber(document.getElementById(id).value); return parseFloat(v)||0; }
+function hasValue(id){ return cleanNumber(document.getElementById(id).value)!==""; }
+function rm(x){ return "RM"+(isFinite(x)?x:0).toLocaleString("en-MY",{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function numberFormat(x){ return (isFinite(x)?x:0).toLocaleString("en-MY",{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function pct(x){ return (isFinite(x)?x:0).toFixed(2)+"%"; }
+
+document.querySelectorAll("input.money").forEach(input=>{
+  input.addEventListener("focus",()=>{ input.value=cleanNumber(input.value); });
+  input.addEventListener("blur",()=>{
+    const raw=cleanNumber(input.value);
+    if(raw==="") return;
+    const val=parseFloat(raw);
+    if(isFinite(val)) input.value=numberFormat(val);
+  });
 });
-function n(id){return parseFloat(document.getElementById(id).value)||0}
-function rm(x){return "RM"+(isFinite(x)?x:0).toLocaleString("en-MY",{minimumFractionDigits:2,maximumFractionDigits:2})}
-function pct(x){return (isFinite(x)?x:0).toFixed(2)+"%"}
-function calc(){
-  let income=n("income"), ded=n("deduction"), it=n("intransit"), settlement=n("settlement");
-  let rate=n("rate"), yrs=n("years"), loan=n("loan");
-  let months=yrs*12;
-  let kelayakan=income*0.6-ded-it+settlement;
-  let paymentAvailable=Math.max(0, kelayakan - FIXED_YURAN);
-  let maxLoan=(1+rate*yrs)>0 ? paymentAvailable*months/(1+rate*yrs) : 0;
-  let monthlyPayment=months>0 ? loan*(1+rate*yrs)/months : 0;
-  let totalMonthlyDeduction=monthlyPayment+FIXED_YURAN;
-  let newDeduction=Math.max(0, ded-settlement)+totalMonthlyDeduction;
-  let baki=income-newDeduction;
-  let bakiP=income?baki/income*100:0;
-  let onhand=loan*FIXED_PAYOUT;
 
-  document.getElementById("kelayakanBulanan").textContent=rm(kelayakan);
-  document.getElementById("maxloan").textContent=rm(maxLoan);
-  document.getElementById("onhand").textContent=rm(onhand);
-  document.getElementById("yuranOut").textContent=rm(FIXED_YURAN);
-  document.getElementById("payment").textContent=rm(monthlyPayment);
-  document.getElementById("totalMonthlyOut").textContent=rm(totalMonthlyDeduction);
-  document.getElementById("baki").textContent=rm(baki);
-  document.getElementById("bakiPct").textContent=pct(bakiP);
+["income","deduction","intransit","settlement","limit","rate","years","requestedFinancing"].forEach(id=>{
+ document.getElementById(id).addEventListener("input",calculate);
+ document.getElementById(id).addEventListener("change",calculate);
+});
 
-  let overLoan = loan > maxLoan + 0.005;
-  let over60 = newDeduction > income*0.6 + 0.005;
-  let lowBaki = baki < MIN_BAKI_GAJI - 0.005;
-  let warn = [];
-  if(overLoan) warn.push("Loan Amount > Max Loan");
-  if(over60) warn.push("Potongan > 60%");
-  if(lowBaki) warn.push("Baki Gaji < RM1,100");
-  if(paymentAvailable <= 0) warn.push("Tiada kelayakan");
-  document.getElementById("warning").textContent = warn.length ? warn.join(" / ") : "-";
-
-  let ok = !overLoan && !over60 && !lowBaki && paymentAvailable > 0;
-  let st=document.getElementById("status");
-  st.textContent=ok?"LAYAK":"TIDAK LAYAK";
-  st.className="status "+(ok?"layak":"not");
+function showEmpty(){
+ ["monthlyEligibility","maximumFinancing","onhand","instalment","totalMonthlyDeduction","netSalaryBalance","salaryBalancePct"].forEach(id=>document.getElementById(id).textContent="-");
+ document.getElementById("warningRow").style.display="none";
+ let st=document.getElementById("status"); st.textContent="NOT ELIGIBLE"; st.className="status noteligible";
 }
-calc();
+
+function calculate(){
+ if(!hasValue("income")&&!hasValue("deduction")&&!hasValue("requestedFinancing")){ showEmpty(); return; }
+ let income=n("income"), deduction=n("deduction"), inTransit=n("intransit"), settlement=n("settlement");
+ let limit=parseFloat(document.getElementById("limit").value)||0.6;
+ let rate=parseFloat(document.getElementById("rate").value)||0.0999;
+ let years=parseFloat(document.getElementById("years").value)||10;
+ let requested=n("requestedFinancing"), months=years*12;
+
+ let monthlyEligibility=income*limit-deduction-inTransit+settlement;
+ let paymentAvailable=Math.max(0,monthlyEligibility-FIXED_FEE);
+ let maximumFinancing=(1+rate*years)>0?paymentAvailable*months/(1+rate*years):0;
+ let monthlyInstalment=months>0?requested*(1+rate*years)/months:0;
+ let totalMonthlyDeduction=monthlyInstalment+FIXED_FEE;
+ let adjustedCurrentDeduction=Math.max(0,deduction-settlement);
+ let newTotalDeduction=adjustedCurrentDeduction+totalMonthlyDeduction;
+ let netSalaryBalance=income-newTotalDeduction;
+ let salaryBalancePct=income?netSalaryBalance/income*100:0;
+ let onHand=requested*FIXED_PAYOUT;
+
+ document.getElementById("monthlyEligibility").textContent=rm(monthlyEligibility);
+ document.getElementById("maximumFinancing").textContent=rm(maximumFinancing);
+ document.getElementById("onhand").textContent=requested?rm(onHand):"-";
+ document.getElementById("fee").textContent=rm(FIXED_FEE);
+ document.getElementById("instalment").textContent=requested?rm(monthlyInstalment):"-";
+ document.getElementById("totalMonthlyDeduction").textContent=requested?rm(totalMonthlyDeduction):"-";
+ document.getElementById("netSalaryBalance").textContent=income?rm(netSalaryBalance):"-";
+ document.getElementById("salaryBalancePct").textContent=income?pct(salaryBalancePct):"-";
+
+ let warnings=[];
+ if(requested>0 && requested>maximumFinancing+0.005) warnings.push("Requested Financing exceeds Maximum Financing");
+ if(requested>0 && newTotalDeduction>income*limit+0.005) warnings.push("Deduction exceeds "+Math.round(limit*100)+"%");
+ if(requested>0 && netSalaryBalance<MIN_NET_SALARY_BALANCE-0.005) warnings.push("Net Salary Balance below RM1,100");
+
+ let preWarnings=[];
+ let adjustedOnlyDeduction=Math.max(0,deduction-settlement);
+ let currentNetBalance=income-adjustedOnlyDeduction;
+ if(paymentAvailable<=0) preWarnings.push("No monthly eligibility");
+ if(income>0 && adjustedOnlyDeduction>income*limit+0.005) preWarnings.push("Deduction exceeds "+Math.round(limit*100)+"%");
+ if(income>0 && currentNetBalance<MIN_NET_SALARY_BALANCE-0.005) preWarnings.push("Net Salary Balance below RM1,100");
+
+ let warningRow=document.getElementById("warningRow");
+ let st=document.getElementById("status");
+
+ if(requested<=0){
+   if(preWarnings.length){
+     warningRow.style.display="grid"; document.getElementById("warning").textContent=preWarnings.join(" / ");
+     st.textContent="NOT ELIGIBLE"; st.className="status noteligible";
+   } else {
+     warningRow.style.display="none"; document.getElementById("warning").textContent="-";
+     st.textContent="ELIGIBLE"; st.className="status eligible";
+   }
+ } else {
+   if(warnings.length){
+     warningRow.style.display="grid"; document.getElementById("warning").textContent=warnings.join(" / ");
+     st.textContent="NOT ELIGIBLE"; st.className="status noteligible";
+   } else {
+     warningRow.style.display="none"; document.getElementById("warning").textContent="-";
+     st.textContent="ELIGIBLE"; st.className="status eligible";
+   }
+ }
+}
+calculate();
 </script>
 </body>
 </html>
